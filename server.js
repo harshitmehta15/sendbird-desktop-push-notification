@@ -10,5 +10,5 @@ app.get('/', function(req, res) {
   res.sendfile('index.html');
 });
 
-app.listen(PORT);
+app.listen(process.env.PORT || PORT);
 console.log(`[SERVER RUNNING] 127.0.0.1:${PORT}`);
