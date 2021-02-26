@@ -1,4 +1,12 @@
 const express = require('express');
+require('dotenv/config');
+const webpush = require('web-push');
+ 
+const publicVapidKey = process.env.PUBLIC_VAPID_KEY;
+const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
+ 
+webpush.setVapidDetails('mailto:mehtapresent@gmail.com', publicVapidKey, privateVapidKey);
+
 const app = express();
 
 const PORT = 9000;
@@ -13,36 +21,20 @@ app.get('/', function(req, res) {
 app.listen(process.env.PORT || PORT);
 console.log(`[SERVER RUNNING] 127.0.0.1:${PORT}`);
 
-
 app.post("/profanity", (req, res) => {
-  console.log("pakad liya"); 
-  console.log(req.body); 
-  pushNotification();
-  res.status(200).end(); // Responding is important
+  console.log("Hook Caught"); 
+  postNotification();
+  res.status(200).end();
 });
 
-function pushNotification(){
-  // Let's check if the browser supports notifications
-  if (!("Notification" in window)) {
-    alert("This browser does not support desktop notification");
-  }
+const newLocal = '/notify';
+app.post(newLocal, (req, res) => {
+  const notify = req.body;
+  res.send(200);
+  let i = 0;
+  setInterval(() => {
+    const payload = JSON.stringify({ title: `Hello!`, body: i++ });
+    webpush.sendNotification(subscription, payload);
+  }, 500);
+});
 
-  // Let's check whether notification permissions have already been granted
-  else if (Notification.permission === "granted") {
-    // If it's okay let's create a notification
-    var notification = new Notification("Hi there!");
-  }
-
-  // Otherwise, we need to ask the user for permission
-  else if (Notification.permission !== "denied") {
-    Notification.requestPermission().then(function (permission) {
-      // If the user accepts, let's create a notification
-      if (permission === "granted") {
-        var notification = new Notification("Hi there!");
-      }
-    });
-  }
-
-  // At last, if the user has denied notifications, and you
-  // want to be respectful there is no need to bother them any more.
-}

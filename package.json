@@ -34,8 +34,10 @@
     "webpack-dev-server": "^3.1.11"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "moment": "^2.22.1",
-    "sendbird": "^3.0.111"
+    "sendbird": "^3.0.111",
+    "web-push": "^3.4.4"
   },
   "engines": {
     "node": "10.0"
