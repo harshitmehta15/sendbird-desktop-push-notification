@@ -44,11 +44,11 @@ app.post('/subscribe', (req, res) => {
   });
 });
 
-setInterval(() => {
+/*setInterval(() => {
   console.log("pushing notification");
   if(subscription) { 
     console.log("subs !=Null - pushing notification");
     const payload = JSON.stringify({ title: 'test' });
     webpush.sendNotification(subscription,payload);
 }
-}, 5000);
+}, 5000); */
