@@ -27,7 +27,7 @@ console.log(`[SERVER RUNNING] 127.0.0.1:${PORT}`);
 app.post("/profanity", (req, res) => {
   console.log("Hook Caught");
   res.status(200).end(); 
-  const payload = JSON.stringify({ title: 'test' });
+  const payload = JSON.stringify({ title: 'Message Filtered' });
   webpush.sendNotification(subscription, payload).catch(error => {
     console.error(error.stack);
   });
