@@ -7,7 +7,8 @@ module.exports = {
   extends: 'eslint:recommended',
   parserOptions: {
     parser: 'babel-eslint',
-    sourceType: 'module'
+    sourceType: 'module',
+    ecmaVersion: 8
   },
   rules: {
     'linebreak-style': ['error', 'unix'],
@@ -18,4 +19,5 @@ module.exports = {
     'no-inner-declarations': 1,
     'no-useless-escape': 1
   }
+  
 };
